@@ -17,7 +17,8 @@ Electronで作るマークダウンエディタ。Electronの勉強のために�
 
 ## 今後の展望
 * .mdファイルの読み込みと保存の実装
-* エディタとプレビューでスクロールがずれるの修正
+* エディタとプレビューでスクロールがずれる問題の修正
 * [office-ui-fabric-react](http://dev.office.com/fabric)を使って、見た目をOfficeぽくする。
 * CSSやJSをnode_modulesから直接参照してる部分の修正
+* ディレクトリ構造の修正
 * テストを書く
