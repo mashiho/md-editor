@@ -4,7 +4,7 @@ import browserify from 'browserify';
 import source from 'vinyl-source-stream';
 
 gulp.task('build', () => {
-  browserify({ entries: ['./index.js'] })
+  browserify({ entries: ['app.js'] })
   .transform(babelify)
   .bundle()
   .pipe(source('bundle.js'))
