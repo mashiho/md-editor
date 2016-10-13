@@ -10,3 +10,9 @@ gulp.task('build', () => {
   .pipe(source('bundle.js'))
   .pipe(gulp.dest('./public'));
 });
+
+gulp.task('watch', () => {
+  gulp.watch(['app.js', 'main.js'], ['build']);
+});
+
+gulp.task('default', ['build', 'watch']);
