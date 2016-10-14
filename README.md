@@ -13,7 +13,8 @@ Electronで作るマークダウンエディタ。Electronの勉強のために�
 
 ## 起動方法
 1. プロジェクトフォルダにて`$ npm install`
-2. `$ npm start`で起動する
+2. `$ gulp build`でJSをビルド
+3. `$ npm start`で起動する
 
 ## 今後の展望
 * .mdファイルの読み込みと保存の実装
