@@ -5,7 +5,7 @@ const Editor = React.createClass({
 
   getInitialState() {
     return {
-      text: 'テキストを入力してください',
+      text: '',
     };
   },
 
@@ -23,7 +23,7 @@ const Editor = React.createClass({
       lineWrapping: true
     };
     return (
-      <Codemirror id="editor" ref="editor" value={this.state.code} onChange={this.updateText} options={options} />
+      <Codemirror id="editor" ref="editor" value={this.props.text} onChange={this.updateText} options={options} />
     );
   }
 

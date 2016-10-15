@@ -1,4 +1,7 @@
 const electron = require('electron');
+const FileSystem = require('./models/file_system');
+
+const fileSystem = new FileSystem();
 
 const {
   app,
@@ -19,7 +22,12 @@ const menu = Menu.buildFromTemplate([
   {
     label: 'File',
     submenu: [
-      { label: 'New File' },
+      {
+        label: 'Open File',
+        click: function () {
+          fileSystem.openFile();
+        },
+      },
       { label: 'Save' },
     ],
   },
