@@ -21,7 +21,7 @@ class FileSystem {
       }
       // ビュー側にファイルから読み込んだテキストを送信
       BrowserWindow.getFocusedWindow().webContents.send('send-text', text.toString());
-
+      BrowserWindow.getFocusedWindow().webContents.send('send-path', currentPath);
     });
   }
 

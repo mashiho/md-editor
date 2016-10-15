@@ -15,6 +15,7 @@ const Editor = React.createClass({
 
   render() {
     const options = {
+      theme: 'eclipse',
       mode: 'text/x-markdown',
       autofocus: true,
       lineWrapping: true
