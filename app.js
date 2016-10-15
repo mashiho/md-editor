@@ -17,16 +17,17 @@ const Main = React.createClass({
     };
   },
 
-  updatePreview(markdown) {
+  updateText(text) {
     this.setState({
-      markdown: markdown,
+      text: text,
+      markdown: text,
     });
   },
 
   render() {
     return (
       <div id="main">
-        <Editor onChange={this.updatePreview} text={this.state.text} />
+        <Editor onChange={this.updateText} text={this.state.text} />
         <Preview markdown={this.state.markdown} />
       </div>
     );
@@ -40,4 +41,8 @@ const main = ReactDOM.render(
 
 ipcRenderer.on('send-text', (event, text) => {
   main.setState({ text: text, markdown: text });
+});
+
+ipcRenderer.on('get-data', (event, text) => {
+  ipcRenderer.send('send-data', main.state.markdown);
 });

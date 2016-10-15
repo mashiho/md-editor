@@ -7,6 +7,7 @@ const {
   app,
   BrowserWindow,
   Menu,
+  ipcMain,
 } = electron;
 
 let mainWindow;
@@ -23,12 +24,20 @@ const menu = Menu.buildFromTemplate([
     label: 'File',
     submenu: [
       {
-        label: 'Open File',
+        label: 'Open',
         click: function () {
           fileSystem.openFile();
         },
       },
-      { label: 'Save' },
+      {
+        label: 'Save',
+        click: function () {
+          mainWindow.webContents.send('get-data', '');
+          ipcMain.on('send-data', (event, data) => {
+            fileSystem.saveFile(data);
+          });
+        },
+      },
     ],
   },
   {

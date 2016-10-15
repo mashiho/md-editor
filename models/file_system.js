@@ -19,20 +19,32 @@ class FileSystem {
         console.log(error);
         return;
       }
-
+      // ビュー側にファイルから読み込んだテキストを送信
       BrowserWindow.getFocusedWindow().webContents.send('send-text', text.toString());
 
     });
   }
 
+  writeFile(path, data) {
+    fs.writeFile(path, data, (error) => {
+      if (error) {
+        console.log(error);
+      }
+    });
+  }
+
   openFile() {
     const options = {
-      title: 'ファイルを開く',
+      title: 'Open file',
       filters: [
         { name: 'Markdown File', extensions: ['md'] },
       ],
       properties: ['openFile'],
     };
+
+    /**
+     * NOTE: 同クラスのメソッドを使うためにthisをバインド
+     */
     const self = this;
 
     dialog.showOpenDialog(
@@ -41,6 +53,28 @@ class FileSystem {
       function (fileNames) {
         if (fileNames) {
           self.readFile(fileNames[0]);
+        }
+      }
+    );
+  }
+
+  saveFile(data) {
+    const options = {
+      title: 'Save file',
+      filters: [
+        { name: 'Markdown File', extensions: ['md'] },
+      ],
+      properties: ['openFile'],
+    };
+
+    const self = this;
+
+    dialog.showSaveDialog(
+      BrowserWindow.getFocusedWindow(),
+      options,
+      function (fileName) {
+        if (fileName) {
+          self.writeFile(fileName, data);
         }
       }
     );

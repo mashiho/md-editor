@@ -10,9 +10,6 @@ const Editor = React.createClass({
   },
 
   updateText(newText) {
-    this.setState({
-      text: newText,
-    });
     this.props.onChange(newText);
   },
 
