@@ -3,7 +3,7 @@ const ReactDOM = require('react-dom');
 require('codemirror/mode/markdown/markdown');
 const Editor = require('./components/editor');
 const Preview = require('./components/preview');
-const FileSystem = window.require('./models/file_system');
+const FileSystem = window.require('./models/renderer/file_system');
 const { Layer, CommandBar } = require('office-ui-fabric-react/lib');
 
 const fileSystem = new FileSystem();
@@ -30,20 +30,21 @@ const Main = React.createClass({
   },
 
   render() {
+    const markdown = this.state.markdown;
     const itemsNonFocusable = [
       {
         key: 'openItem',
         name: 'Open File',
         icon: 'OpenFile',
         ariaLabel: 'New. Use left and right arrow keys to navigate',
-        onClick: function () { return; },
+        onClick: function () { fileSystem.openFile(); },
       },
       {
         key: 'saveItem',
         name: 'Save File',
         icon: 'Save',
         ariaLabel: 'New. Use left and right arrow keys to navigate',
-        onClick: function () { return; },
+        onClick: function () { fileSystem.saveFile(markdown); },
       },
     ];
 

@@ -1,5 +1,5 @@
 const electron = require('electron');
-const FileSystem = require('./models/file_system');
+const FileSystem = require('./models/main/file_system');
 
 const fileSystem = new FileSystem();
 

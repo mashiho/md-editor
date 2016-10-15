@@ -1,9 +1,11 @@
+// TODO: メインプロセスとレンダラプロセスで共通のファイルシステムを作成
 const fs = require('fs');
 const electron = require('electron');
 
 const {
   BrowserWindow,
   dialog,
+  remote,
 } = electron;
 
 class FileSystem {
@@ -20,8 +22,8 @@ class FileSystem {
         return;
       }
       // ビュー側にファイルから読み込んだテキストを送信
-      BrowserWindow.getFocusedWindow().webContents.send('send-text', text.toString());
-      BrowserWindow.getFocusedWindow().webContents.send('send-path', currentPath);
+      remote.BrowserWindow.getFocusedWindow().webContents.send('send-text', text.toString());
+      remote.BrowserWindow.getFocusedWindow().webContents.send('send-path', currentPath);
     });
   }
 
@@ -47,8 +49,8 @@ class FileSystem {
      */
     const self = this;
 
-    dialog.showOpenDialog(
-      BrowserWindow.getFocusedWindow(),
+    remote.dialog.showOpenDialog(
+      remote.BrowserWindow.getFocusedWindow(),
       options,
       function (fileNames) {
         if (fileNames) {
@@ -69,8 +71,8 @@ class FileSystem {
 
     const self = this;
 
-    dialog.showSaveDialog(
-      BrowserWindow.getFocusedWindow(),
+    remote.dialog.showSaveDialog(
+      remote.BrowserWindow.getFocusedWindow(),
       options,
       function (fileName) {
         if (fileName) {
