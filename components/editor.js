@@ -18,7 +18,8 @@ const Editor = React.createClass({
       theme: 'eclipse',
       mode: 'text/x-markdown',
       autofocus: true,
-      lineWrapping: true
+      lineWrapping: true,
+      fixedGutter: true,
     };
     return (
       <Codemirror id="editor" ref="editor" value={this.props.text} onChange={this.updateText} options={options} />

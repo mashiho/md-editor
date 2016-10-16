@@ -2,6 +2,10 @@ html, body, #md-editor, #content, #main, .CodeMirror {
     height: 100%;
 }
 
+.CodeMirror {
+  height: auto;
+}
+
 #main {
     width: 100%;
     display: flex;
@@ -36,6 +40,7 @@ body {
 
 .ReactCodeMirror {
     width: 50%;
+    overflow: scroll;
 }
 
 #preview {

@@ -18,7 +18,7 @@ const Main = React.createClass({
     return {
       text: '',
       markdown: '',
-      path: 'Undefined',
+      path: '名称未設定.md',
     };
   },
 
