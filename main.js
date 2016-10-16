@@ -26,12 +26,14 @@ const menu = Menu.buildFromTemplate([
     submenu: [
       {
         label: 'Open',
+        accelerator: 'CmdOrCtrl+O',
         click: function () {
           fileSystem.openFile();
         },
       },
       {
         label: 'Save',
+        accelerator: 'CmdOrCtrl+S',
         click: function () {
           mainWindow.webContents.send('get-data', '');
           ipcMain.on('send-data', (event, data) => {
@@ -45,7 +47,7 @@ const menu = Menu.buildFromTemplate([
     label: 'Edit',
     submenu: [
       { label: 'Undo', accelerator: 'CmdOrCtrl+Z', selector: 'undo:' },
-      { label: 'Redo', accelerator: 'Shift+CmdOrCtrl+Z', selector: 'redo:' },
+      { label: 'Redo', accelerator: 'CmdOrCtrl+Y', selector: 'redo:' },
       { type: 'separator' },
       { label: 'Cut', accelerator: 'CmdOrCtrl+X', selector: 'cut:' },
       { label: 'Copy', accelerator: 'CmdOrCtrl+C', selector: 'copy:' },

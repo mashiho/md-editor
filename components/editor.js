@@ -20,6 +20,7 @@ const Editor = React.createClass({
       autofocus: true,
       lineWrapping: true,
       fixedGutter: true,
+      coverGutterNextToScrollbar: true,
     };
     return (
       <Codemirror id="editor" ref="editor" value={this.props.text} onChange={this.updateText} options={options} />
