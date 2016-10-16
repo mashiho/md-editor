@@ -34,7 +34,7 @@ gulp.task('browserSync', () => {
 });
 
 gulp.task('watch', () => {
-  gulp.watch(['app.js', 'main.js', 'components/**/*.js'], ['build']);
+  gulp.watch(['app.js', 'main.js', 'components/**/*.js', 'models/**/*.js'], ['build']);
 });
 
 gulp.task('default', ['build', 'watch']);

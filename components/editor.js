@@ -5,25 +5,25 @@ const Editor = React.createClass({
 
   getInitialState() {
     return {
-      text: 'テキストを入力してください',
+      text: '',
     };
   },
 
   updateText(newText) {
-    this.setState({
-      text: newText,
-    });
     this.props.onChange(newText);
   },
 
   render() {
     const options = {
+      theme: 'eclipse',
       mode: 'text/x-markdown',
       autofocus: true,
-      lineWrapping: true
+      lineWrapping: true,
+      fixedGutter: true,
+      coverGutterNextToScrollbar: true,
     };
     return (
-      <Codemirror id="editor" ref="editor" value={this.state.code} onChange={this.updateText} options={options} />
+      <Codemirror id="editor" ref="editor" value={this.props.text} onChange={this.updateText} options={options} />
     );
   }
 
