@@ -1,0 +1,7 @@
+machine:
+  node:
+    version: 6.7.0
+  post:
+    - npm install -g npm@3
+  timezone: Asia/Tokyo
+  
