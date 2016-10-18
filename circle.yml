@@ -4,4 +4,6 @@ machine:
   post:
     - npm install -g npm@3
   timezone: Asia/Tokyo
-  
+test:
+  override:
+    - node test/main_spec
