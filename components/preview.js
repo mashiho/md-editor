@@ -1,7 +1,7 @@
 const React = require('react');
 const marked = require('marked');
 
-const Preview = React.createClass({
+class Preview extends React.Component {
 
   render() {
     const html = marked(this.props.markdown);
@@ -12,6 +12,6 @@ const Preview = React.createClass({
     );
   }
 
-});
+}
 
 module.exports = Preview;

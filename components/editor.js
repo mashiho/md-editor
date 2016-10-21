@@ -1,17 +1,19 @@
 const React = require('react');
 const Codemirror = require('react-codemirror');
 
-const Editor = React.createClass({
+class Editor extends React.Component {
 
-  getInitialState() {
-    return {
+  constructor(props) {
+    super(props);
+    this.updateText = this.updateText.bind(this);
+    this.state = {
       text: '',
     };
-  },
+  }
 
   updateText(newText) {
     this.props.onChange(newText);
-  },
+  }
 
   render() {
     const options = {
@@ -23,10 +25,15 @@ const Editor = React.createClass({
       coverGutterNextToScrollbar: true,
     };
     return (
-      <Codemirror id="editor" ref="editor" value={this.props.text} onChange={this.updateText} options={options} />
+      <Codemirror
+        id="editor"
+        value={this.props.text}
+        onChange={this.updateText}
+        options={options}
+      />
     );
   }
 
-});
+}
 
 module.exports = Editor;
