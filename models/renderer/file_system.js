@@ -38,6 +38,15 @@ class FileSystem {
     });
   }
 
+  newFile() {
+    const data = {
+      text: '',
+      markdown: '',
+      path: 'Undefined.md',
+    };
+    remote.BrowserWindow.getFocusedWindow().webContents.send('setData', data);
+  }
+
   openFile() {
     const options = {
       title: 'Open file',

@@ -37,6 +37,13 @@ class Main extends React.Component {
     const path = this.state.path;
     const itemsNonFocusable = [
       {
+        key: 'newItem',
+        name: 'New File',
+        icon: 'Add',
+        ariaLabel: 'New. Use left and right arrow keys to navigate',
+        onClick() { fileSystem.newFile(); },
+      },
+      {
         key: 'openItem',
         name: 'Open File',
         icon: 'OpenFile',
