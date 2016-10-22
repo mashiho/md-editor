@@ -39,12 +39,23 @@ class FileSystem {
   }
 
   newFile() {
-    const data = {
-      text: '',
-      markdown: '',
-      path: 'Undefined.md',
+    const options = {
+      type: 'info',
+      title: 'Information',
+      message: 'Creating a new file. Is it to abandon all edits?',
+      buttons: ['Yes', 'No'],
     };
-    remote.BrowserWindow.getFocusedWindow().webContents.send('setData', data);
+
+    remote.dialog.showMessageBox(remote.BrowserWindow.getFocusedWindow(), options, (index) => {
+      if (index === 0) {
+        const data = {
+          text: '',
+          markdown: '',
+          path: 'Undefined.md',
+        };
+        remote.BrowserWindow.getFocusedWindow().webContents.send('setData', data);
+      }
+    });
   }
 
   openFile() {
