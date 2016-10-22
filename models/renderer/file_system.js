@@ -22,8 +22,11 @@ class FileSystem {
         return;
       }
       // ビュー側にファイルから読み込んだテキストを送信
-      remote.BrowserWindow.getFocusedWindow().webContents.send('send-text', text.toString());
-      remote.BrowserWindow.getFocusedWindow().webContents.send('send-path', currentPath);
+      const data = {
+        text: text.toString(),
+        path: currentPath,
+      };
+      remote.BrowserWindow.getFocusedWindow().webContents.send('setData', data);
     });
   }
 
@@ -60,26 +63,30 @@ class FileSystem {
     );
   }
 
-  saveFile(data) {
-    const options = {
-      title: 'Save file',
-      filters: [
-        { name: 'Markdown File', extensions: ['md'] },
-      ],
-      properties: ['openFile'],
-    };
+  saveFile(data, path = null) {
+    if (path) {
+      this.writeFile(path, data);
+    } else {
+      const options = {
+        title: 'Save file',
+        filters: [
+          { name: 'Markdown File', extensions: ['md'] },
+        ],
+        properties: ['openFile'],
+      };
 
-    const self = this;
+      const self = this;
 
-    remote.dialog.showSaveDialog(
-      remote.BrowserWindow.getFocusedWindow(),
-      options,
-      function (fileName) {
-        if (fileName) {
-          self.writeFile(fileName, data);
+      remote.dialog.showSaveDialog(
+        remote.BrowserWindow.getFocusedWindow(),
+        options,
+        function (fileName) {
+          if (fileName) {
+            self.writeFile(fileName, data);
+          }
         }
-      }
-    );
+      );
+    }
   }
 }
 

@@ -21,8 +21,11 @@ class FileSystem {
         return;
       }
       // ビュー側にファイルから読み込んだテキストを送信
-      BrowserWindow.getFocusedWindow().webContents.send('send-text', text.toString());
-      BrowserWindow.getFocusedWindow().webContents.send('send-path', currentPath);
+      const data = {
+        text: text.toString(),
+        path: currentPath,
+      };
+      BrowserWindow.getFocusedWindow().webContents.send('setData', data);
     });
   }
 
@@ -59,26 +62,30 @@ class FileSystem {
     );
   }
 
-  saveFile(data) {
-    const options = {
-      title: 'Save file',
-      filters: [
-        { name: 'Markdown File', extensions: ['md'] },
-      ],
-      properties: ['openFile'],
-    };
+  saveFile(data, path = null) {
+    if (path) {
+      this.writeFile(path, data);
+    } else {
+      const options = {
+        title: 'Save file',
+        filters: [
+          { name: 'Markdown File', extensions: ['md'] },
+        ],
+        properties: ['openFile'],
+      };
 
-    const self = this;
+      const self = this;
 
-    dialog.showSaveDialog(
-      BrowserWindow.getFocusedWindow(),
-      options,
-      function (fileName) {
-        if (fileName) {
-          self.writeFile(fileName, data);
+      dialog.showSaveDialog(
+        BrowserWindow.getFocusedWindow(),
+        options,
+        function (fileName) {
+          if (fileName) {
+            self.writeFile(fileName, data);
+          }
         }
-      }
-    );
+      );
+    }
   }
 }
 

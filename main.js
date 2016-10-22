@@ -35,9 +35,16 @@ const menu = Menu.buildFromTemplate([
         label: 'Save',
         accelerator: 'CmdOrCtrl+S',
         click: function () {
-          mainWindow.webContents.send('get-data', '');
-          ipcMain.on('send-data', (event, data) => {
-            fileSystem.saveFile(data);
+          mainWindow.webContents.send('getData', '');
+          /**
+           * NOTE: レンダラプロセスで読み込んだファイルのテキストとパスを受信
+           */
+          ipcMain.on('setData', (event, data) => {
+            if (data.path === 'Undefined.md') {
+              fileSystem.saveFile(data.markdown);
+            } else {
+              fileSystem.saveFile(data.markdown, data.path);
+            }
           });
         },
       },

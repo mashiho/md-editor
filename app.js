@@ -21,7 +21,7 @@ class Main extends React.Component {
     this.state = {
       text: '',
       markdown: '',
-      path: '名称未設定.md',
+      path: 'Undefined.md',
     };
   }
 
@@ -34,6 +34,7 @@ class Main extends React.Component {
 
   render() {
     const markdown = this.state.markdown;
+    const path = this.state.path;
     const itemsNonFocusable = [
       {
         key: 'openItem',
@@ -47,7 +48,13 @@ class Main extends React.Component {
         name: 'Save File',
         icon: 'Save',
         ariaLabel: 'New. Use left and right arrow keys to navigate',
-        onClick() { fileSystem.saveFile(markdown); },
+        onClick() {
+          if (path === 'Undefined.md') {
+            fileSystem.saveFile(markdown);
+          } else {
+            fileSystem.saveFile(markdown, path);
+          }
+        },
       },
     ];
 
@@ -76,18 +83,26 @@ const main = ReactDOM.render(
   <Main />, document.getElementById('md-editor')
 );
 
-ipcRenderer.on('send-text', (event, text) => {
-  /**
-   * NOTE: text: textと書く場合, textと省略して書くことできる
-   * @see http://eslint.org/docs/rules/object-shorthand
-   */
-  main.setState({ text, markdown: text });
+/**
+ * NOTE: メインプロセスで読み込んだファイルのテキストを受信
+ * TODO: send-pathと処理を統一する
+ */
+ipcRenderer.on('setData', (event, data) => {
+  console.log(data);
+  main.setState({
+    text: data.text,
+    markdown: data.text,
+    path: data.path,
+  });
 });
 
-ipcRenderer.on('send-path', (event, path) => {
-  main.setState({ path });
-});
-
-ipcRenderer.on('get-data', () => {
-  ipcRenderer.send('send-data', main.state.markdown);
+/**
+ * NOTE: メインプロセスでのファイル保存処理用にテキストとファイルパスを送信
+ */
+ipcRenderer.on('getData', () => {
+  const data = {
+    markdown: main.state.markdown,
+    path: main.state.path,
+  };
+  ipcRenderer.send('setData', data);
 });
