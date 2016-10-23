@@ -6,8 +6,8 @@
     width: 100%;
     display: flex;
     position: absolute;
-    top: 65px;
-    bottom: 35px;
+    top: 88px;
+    bottom: 29px;
 }
 
 body {
@@ -22,7 +22,8 @@ body {
 }
 
 #header {
-    padding: 5px 20px;
+    font-size: 20px;
+    padding: 10px 30px;
 }
 
 #footer {
@@ -33,9 +34,15 @@ body {
 }
 
 .ms-Layer {
-    height: 29px;
+    height: 48px;
     display: block;
 }
+
+/*.ReactCodeMirror {
+    position: absolute;
+    bottom: 0px;
+    top: 0px;
+}*/
 
 .ReactCodeMirror {
     width: 50%;
