@@ -59,6 +59,10 @@ body {
     z-index: 0;
 }
 
+.CodeMirror-wrap {
+    height: 100%;
+}
+
 .CodeMirror-sizer {
     border-right: 20px solid transparent !important;
 }
