@@ -9,4 +9,4 @@ dependencies:
     - npm run-script build
 test:
   override:
-    - node test/main_spec
+    - npm run-script test

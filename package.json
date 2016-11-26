@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron .",
     "build": "gulp build",
-    "test": "mocha test/**/*.js",
+    "test": "mocha test/**/*.js --require test/setup.js --compilers js:babel-register",
     "gulp": "gulp"
   },
   "babel": {
@@ -46,7 +46,10 @@
     "eslint-plugin-react": "^6.3.0",
     "gulp": "^3.9.1",
     "gulp-webpack": "^1.5.0",
+    "jsdom": "^9.8.3",
     "mocha": "^3.2.0",
+    "react-addons-test-utils": "^15.4.1",
+    "sinon": "^1.17.6",
     "spectron": "^3.4.0",
     "webpack": "^1.13.3"
   }
