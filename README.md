@@ -11,5 +11,5 @@ Markdown editor based on Electron
 
 ## Usage
 1. `$ npm install` (Project folder)
-2. `$ gulp build`
-3. `$ npm start`
+2. `$ npm run-script build`
+3. `$ npm run-script start`
