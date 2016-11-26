@@ -1,9 +1,12 @@
 machine:
   node:
-    version: 6.7.0
+    version: 7.2.0
   post:
     - npm install -g npm@3
   timezone: Asia/Tokyo
+dependencies:
+  pre:
+    - npm run-script build
 test:
   override:
     - node test/main_spec

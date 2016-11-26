@@ -1,22 +1,15 @@
-import babelify from 'babelify';
 import gulp from 'gulp';
-import plumber from 'gulp-plumber';
-import browserify from 'browserify';
-import watchify from 'watchify';
-import source from 'vinyl-source-stream';
+import webpack from 'gulp-webpack';
+const config = require('./webpack.config.js');
 
-// TODO: エラーをキャッチしたときにログを出すようにする
 gulp.task('build', () => {
-  watchify(browserify({ entries: ['app.js'] }))
-  .transform(babelify)
-  .bundle()
-  .pipe(plumber())
-  .pipe(source('bundle.js'))
-  .pipe(gulp.dest('./public'));
+  return gulp.src('')
+  .pipe(webpack(config))
+  .pipe(gulp.dest(''));
 });
 
 gulp.task('watch', () => {
-  gulp.watch(['app.js', 'main.js', 'components/**/*.js', 'models/**/*.js'], ['build']);
+  gulp.watch(['main.js', 'containers/**/*.js', 'components/**/*.js', 'models/**/*.js'], ['build']);
 });
 
 gulp.task('default', ['build', 'watch']);

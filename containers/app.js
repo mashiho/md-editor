@@ -1,19 +1,16 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-require('codemirror/mode/markdown/markdown');
-const Editor = require('./components/editor');
-const Preview = require('./components/preview');
+// require('codemirror/mode/markdown/markdown');
+const Editor = require('../components/editor');
+const Preview = require('../components/preview');
 
-const FileSystem = window.require('./models/renderer/file_system');
+const FileSystem = require('../models/renderer/file_system');
 const { Layer, CommandBar } = require('office-ui-fabric-react/lib');
 
 const fileSystem = new FileSystem();
-/**
- * NOTE: BrowserifyとElectronの相性が悪いので、windowをつけないとモジュール読み込みがうまくいかない
- */
-const ipcRenderer = window.require('electron').ipcRenderer;
+const ipcRenderer = require('electron').ipcRenderer;
 
-class Main extends React.Component {
+class App extends React.Component {
 
   constructor(props) {
     super(props);
@@ -86,8 +83,8 @@ class Main extends React.Component {
 
 }
 
-const main = ReactDOM.render(
-  <Main />, document.getElementById('md-editor')
+const app = ReactDOM.render(
+  <App />, document.getElementById('md-editor')
 );
 
 /**
