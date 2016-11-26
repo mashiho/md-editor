@@ -5,7 +5,7 @@ machine:
     - npm install -g npm@3
   timezone: Asia/Tokyo
 dependencies:
-  pre:
+  post:
     - npm run-script build
 test:
   override:
