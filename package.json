@@ -7,7 +7,8 @@
     "start": "electron .",
     "build": "gulp build",
     "test": "mocha test/**/*.js --require test/setup.js --compilers js:babel-register",
-    "gulp": "gulp"
+    "gulp": "gulp",
+    "package": "electron-packager . MDEditor --platform=darwin --arch=x64 --version=1.4.8"
   },
   "babel": {
     "sourceMaps": "inline",
@@ -38,6 +39,7 @@
     "browser-sync": "^2.17.3",
     "chai": "^3.5.0",
     "devtron": "^1.4.0",
+    "electron-packager": "^8.3.0",
     "enzyme": "^2.6.0",
     "eslint": "^3.7.1",
     "eslint-config-airbnb": "^12.0.0",

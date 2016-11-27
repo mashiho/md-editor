@@ -1,4 +1,5 @@
 node_modules
 public/
 MD-darwin-x64/
+MDEditor-darwin-x64
 .vscode
