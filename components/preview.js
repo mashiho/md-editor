@@ -1,5 +1,5 @@
-const React = require('react');
-const marked = require('marked');
+import React from 'react';
+import marked from 'marked';
 
 class Preview extends React.Component {
 

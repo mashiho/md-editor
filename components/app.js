@@ -4,6 +4,7 @@ import Editor from '../components/editor';
 import Preview from '../components/preview';
 import FileSystem from '../models/renderer/file_system';
 import { Layer, CommandBar } from 'office-ui-fabric-react/lib';
+import markdown from 'codemirror/mode/markdown/markdown';
 
 const fileSystem = new FileSystem();
 

@@ -12,7 +12,6 @@ const app = ReactDOM.render(
  * TODO: send-pathと処理を統一する
  */
 ipcRenderer.on('setData', (event, data) => {
-  console.log(data);
   app.setState({
     text: data.text,
     markdown: data.text,

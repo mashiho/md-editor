@@ -1,5 +1,5 @@
-const React = require('react');
-const Codemirror = require('react-codemirror');
+import React from 'react';
+import Codemirror from 'react-codemirror';
 
 class Editor extends React.Component {
 
