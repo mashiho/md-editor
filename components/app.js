@@ -5,6 +5,7 @@ import Preview from '../components/preview';
 import FileSystem from '../models/renderer/file_system';
 import { Layer, CommandBar } from 'office-ui-fabric-react/lib';
 import markdown from 'codemirror/mode/markdown/markdown';
+import SplitPane from 'react-split-pane';
 
 const fileSystem = new FileSystem();
 
@@ -67,8 +68,10 @@ class App extends React.Component {
         </Layer>
         <CommandBar items={itemsNonFocusable} />
         <div id="main">
-          <Editor onChange={this.updateText} text={this.state.text} />
-          <Preview markdown={this.state.markdown} />
+          <SplitPane split="vertical">
+            <Editor onChange={this.updateText} text={this.state.text} />
+            <Preview markdown={this.state.markdown} />
+          </SplitPane>
         </div>
         <Layer>
           <div id="footer" className="ms-bgColor-themeDarkAlt ms-fontColor-white">
