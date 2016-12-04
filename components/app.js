@@ -68,7 +68,7 @@ class App extends React.Component {
         </Layer>
         <CommandBar items={itemsNonFocusable} />
         <div id="main">
-          <SplitPane split="vertical">
+          <SplitPane split="vertical" defaultSize="50%">
             <Editor onChange={this.updateText} text={this.state.text} />
             <Preview markdown={this.state.markdown} />
           </SplitPane>

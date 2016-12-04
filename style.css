@@ -36,11 +36,6 @@ body {
     padding: 5px 20px;
 }
 
-/* エディタ・プレビュー分割 */
-.Pane.vertical.Pane1 {
-  width: 50vw !important;
-}
-
 /**
  * エディタ
  * TODO: ゴリ押し実装なので、メンテナンス性のある書き方に変更
