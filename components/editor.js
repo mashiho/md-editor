@@ -5,13 +5,12 @@ class Editor extends React.Component {
 
   constructor(props) {
     super(props);
-    this.updateText = this.updateText.bind(this);
     this.state = {
       text: '',
     };
   }
 
-  updateText(newText) {
+  updateText = (newText) => {
     this.props.onChange(newText);
   }
 
