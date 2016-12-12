@@ -8,7 +8,7 @@ import { shallow, mount } from 'enzyme';
 import sinon from 'sinon';
 import marked from 'marked';
 
-describe('Appコンポーネントのテスト', () => {
+describe.skip('Appコンポーネントのテスト', () => {
   it('<Editor />と<Preview />がレンダリングされていること', () => {
     const wrapper = shallow(<App />);
     expect(wrapper.find(Editor)).to.have.length(1);

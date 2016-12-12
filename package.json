@@ -29,6 +29,7 @@
     "codemirror": "^5.19.0",
     "electron": "^1.4.3",
     "github-markdown-css": "^2.4.1",
+    "highlight.js": "^9.8.0",
     "marked": "^0.3.6",
     "office-ui-fabric-react": "^0.58.0",
     "react": "^15.3.2",
