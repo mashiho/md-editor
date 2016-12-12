@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Header from '../components/header';
+import Footer from '../components/footer';
 import Editor from '../components/editor';
 import Preview from '../components/preview';
 import { Layer } from 'office-ui-fabric-react/lib';
@@ -36,11 +37,7 @@ class App extends React.Component {
             <Preview markdown={this.state.markdown} />
           </SplitPane>
         </div>
-        <Layer>
-          <div id="footer" className="ms-bgColor-themeDarkAlt ms-fontColor-white">
-            {this.state.path}
-          </div>
-        </Layer>
+        <Footer path={this.state.path} />
       </div>
     );
   }
