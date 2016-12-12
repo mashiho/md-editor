@@ -1,6 +1,8 @@
 import gulp from 'gulp';
 import webpack from 'gulp-webpack';
 const config = require('./webpack.config.js');
+const electron = require('electron-connect').server.create();
+
 
 gulp.task('build', () => {
   return gulp.src('')
@@ -8,8 +10,13 @@ gulp.task('build', () => {
   .pipe(gulp.dest(''));
 });
 
-gulp.task('watch', () => {
-  gulp.watch(['main.js', 'containers/**/*.js', 'components/**/*.js', 'models/**/*.js'], ['build']);
+gulp.task('start', () => {
+  electron.start();
 });
 
-gulp.task('default', ['build', 'watch']);
+gulp.task('watch', () => {
+  gulp.watch(['main.js', 'containers/**/*.js', 'components/**/*.js', 'models/**/*.js'], ['build', electron.restart]);
+  gulp.watch('style.css', electron.reload);
+});
+
+gulp.task('default', ['build', 'start', 'watch']);
