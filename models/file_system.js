@@ -1,4 +1,3 @@
-// TODO: メインプロセスとレンダラプロセスで共通のファイルシステムを作成
 const fs = require('fs');
 const electron = require('electron');
 
@@ -8,14 +7,11 @@ const {
 } = electron;
 
 class FileSystem {
-  constructor() {
 
-  }
-
-  readFile(path) {
+  static readFile(path) {
     const currentPath = path;
 
-    fs.readFile(path, function (error, text) {
+    fs.readFile(path, (error, text) => {
       if (error) {
         console.log(error);
         return;
@@ -29,15 +25,39 @@ class FileSystem {
     });
   }
 
-  writeFile(path, data) {
+  static writeFile(path, data) {
     fs.writeFile(path, data, (error) => {
       if (error) {
         console.log(error);
       }
+      const completeData = {
+        text: data,
+        markdown: data,
+        path,
+      };
+      BrowserWindow.getFocusedWindow().webContents.send('setData', completeData);
     });
   }
 
-  openFile() {
+  static newFile() {
+    const options = {
+      type: 'info',
+      title: 'Information',
+      message: 'Creating a new file. Is it to abandon all edits?',
+      buttons: ['Yes', 'No'],
+    };
+
+    const index = dialog.showMessageBox(BrowserWindow.getFocusedWindow(), options);
+    if (index === 0) {
+      const data = {
+        text: '',
+        path: 'Undefined.md',
+      };
+      BrowserWindow.getFocusedWindow().webContents.send('setData', data);
+    }
+  }
+
+  static openFile() {
     const options = {
       title: 'Open file',
       filters: [
@@ -46,23 +66,18 @@ class FileSystem {
       properties: ['openFile'],
     };
 
-    /**
-     * NOTE: 同クラスのメソッドを使うためにthisをバインド
-     */
-    const self = this;
-
     dialog.showOpenDialog(
       BrowserWindow.getFocusedWindow(),
       options,
-      function (fileNames) {
+      (fileNames) => {
         if (fileNames) {
-          self.readFile(fileNames[0]);
+          this.readFile(fileNames[0]);
         }
       }
     );
   }
 
-  saveFile(data, path = null) {
+  static saveFile(data, path = null) {
     if (path) {
       this.writeFile(path, data);
     } else {
@@ -74,14 +89,12 @@ class FileSystem {
         properties: ['openFile'],
       };
 
-      const self = this;
-
       dialog.showSaveDialog(
         BrowserWindow.getFocusedWindow(),
         options,
-        function (fileName) {
+        (fileName) => {
           if (fileName) {
-            self.writeFile(fileName, data);
+            this.writeFile(fileName, data);
           }
         }
       );

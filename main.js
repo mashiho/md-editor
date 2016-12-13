@@ -1,8 +1,6 @@
 const electron = require('electron');
 const FileSystem = require('./models/file_system');
 
-const fileSystem = new FileSystem();
-
 const {
   app,
   BrowserWindow,
@@ -25,10 +23,17 @@ const menu = Menu.buildFromTemplate([
     label: 'File',
     submenu: [
       {
+        label: 'New File',
+        accelerator: 'CmdOrCtrl+N',
+        click: function () {
+          FileSystem.newFile();
+        },
+      },
+      {
         label: 'Open',
         accelerator: 'CmdOrCtrl+O',
         click: function () {
-          fileSystem.openFile();
+          FileSystem.openFile();
         },
       },
       {
@@ -41,9 +46,9 @@ const menu = Menu.buildFromTemplate([
            */
           ipcMain.on('setData', (event, data) => {
             if (data.path === 'Undefined.md') {
-              fileSystem.saveFile(data.markdown);
+              FileSystem.saveFile(data.markdown);
             } else {
-              fileSystem.saveFile(data.markdown, data.path);
+              FileSystem.saveFile(data.markdown, data.path);
             }
           });
         },
@@ -62,18 +67,18 @@ const menu = Menu.buildFromTemplate([
       { label: 'Select All', accelerator: 'CmdOrCtrl+A', selector: 'selectAll:' },
     ],
   },
-  {
-    label: 'Develop',
-    submenu: [
-      {
-        label: 'Toggle Developer Tools',
-        accelerator: 'Alt+Command+I',
-        click: function () {
-          mainWindow.toggleDevTools();
-        },
-      },
-    ],
-  },
+  // {
+  //   label: 'Develop',
+  //   submenu: [
+  //     {
+  //       label: 'Toggle Developer Tools',
+  //       accelerator: 'Alt+Command+I',
+  //       click: function () {
+  //         mainWindow.toggleDevTools();
+  //       },
+  //     },
+  //   ],
+  // },
 ]);
 
 function createWindow() {
