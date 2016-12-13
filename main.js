@@ -53,6 +53,18 @@ const menu = Menu.buildFromTemplate([
           });
         },
       },
+      {
+        label: 'Save As...',
+        click: function () {
+          mainWindow.webContents.send('getData', '');
+          /**
+           * NOTE: レンダラプロセスで読み込んだファイルのテキストとパスを受信
+           */
+          ipcMain.on('setData', (event, data) => {
+            FileSystem.saveFile(data.markdown);
+          });
+        },
+      },
     ],
   },
   {

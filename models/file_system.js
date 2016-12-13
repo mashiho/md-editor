@@ -100,6 +100,26 @@ class FileSystem {
       );
     }
   }
+
+  static saveAsFile(data) {
+    const options = {
+      title: 'Save As file',
+      filters: [
+        { name: 'Markdown File', extensions: ['md'] },
+      ],
+      properties: ['openFile'],
+    };
+
+    dialog.showSaveDialog(
+      BrowserWindow.getFocusedWindow(),
+      options,
+      (fileName) => {
+        if (fileName) {
+          this.writeFile(fileName, data);
+        }
+      }
+    );
+  }
 }
 
 module.exports = FileSystem;
