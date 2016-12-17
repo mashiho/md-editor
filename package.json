@@ -9,7 +9,7 @@
     "test": "istanbul cover _mocha -- --require test/setup.js --compilers js:babel-register --recursive $(find test -name '*.spec.js')",
     "spectron": "mocha test/main_spec.js",
     "gulp": "gulp",
-    "package": "electron-packager . MDEditor --platform=darwin --arch=x64 --version=1.4.8",
+    "package": "electron-packager . MDEditor --platform=darwin --arch=x64 --version=1.4.8 --icon=icon.icns --overwrite",
     "lint": "eslint components/*.js"
   },
   "babel": {
