@@ -6,9 +6,11 @@
   "scripts": {
     "start": "electron .",
     "build": "gulp build",
-    "test": "mocha test/**/*.js --require test/setup.js --compilers js:babel-register",
+    "test": "istanbul cover _mocha -- --require test/setup.js --compilers js:babel-register --recursive $(find test -name '*.spec.js')",
+    "spectron": "mocha test/main_spec.js",
     "gulp": "gulp",
-    "package": "electron-packager . MDEditor --platform=darwin --arch=x64 --version=1.4.8"
+    "package": "electron-packager . MDEditor --platform=darwin --arch=x64 --version=1.4.8",
+    "lint": "eslint components/*.js"
   },
   "babel": {
     "sourceMaps": "inline",
@@ -42,8 +44,8 @@
     "babel-loader": "^6.2.8",
     "browser-sync": "^2.17.3",
     "chai": "^3.5.0",
+    "chai-enzyme": "^0.6.1",
     "devtron": "^1.4.0",
-    "electron-connect": "^0.6.1",
     "electron-packager": "^8.3.0",
     "enzyme": "^2.6.0",
     "eslint": "^3.7.1",
@@ -53,6 +55,7 @@
     "eslint-plugin-react": "^6.3.0",
     "gulp": "^3.9.1",
     "gulp-webpack": "^1.5.0",
+    "istanbul": "1.0.0-alpha.2",
     "jsdom": "^9.8.3",
     "mocha": "^3.2.0",
     "react-addons-test-utils": "^15.4.1",

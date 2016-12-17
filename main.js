@@ -16,7 +16,7 @@ const menu = Menu.buildFromTemplate([
     submenu: [
       { label: 'About', selector: 'orderFrontStandardAboutPanel:' },
       { type: 'separator' },
-      { label: 'Quit', accelerator: 'Command+Q', click: function () { app.quit(); } },
+      { label: 'Quit', accelerator: 'Command+Q', click() { app.quit(); } },
     ],
   },
   {
@@ -25,21 +25,21 @@ const menu = Menu.buildFromTemplate([
       {
         label: 'New File',
         accelerator: 'CmdOrCtrl+N',
-        click: function () {
+        click() {
           FileSystem.newFile();
         },
       },
       {
         label: 'Open',
         accelerator: 'CmdOrCtrl+O',
-        click: function () {
+        click() {
           FileSystem.openFile();
         },
       },
       {
         label: 'Save',
         accelerator: 'CmdOrCtrl+S',
-        click: function () {
+        click() {
           mainWindow.webContents.send('getData', '');
           /**
            * NOTE: レンダラプロセスで読み込んだファイルのテキストとパスを受信
@@ -55,7 +55,7 @@ const menu = Menu.buildFromTemplate([
       },
       {
         label: 'Save As...',
-        click: function () {
+        click() {
           mainWindow.webContents.send('getData', '');
           /**
            * NOTE: レンダラプロセスで読み込んだファイルのテキストとパスを受信

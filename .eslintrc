@@ -1,3 +1,12 @@
 {
-  "extends": "airbnb"
+  "extends": "airbnb",
+  "rules": {
+    "no-undef": 0,
+    "import/no-extraneous-dependencies": 0,
+    "impoer/no-named-as-default": 0,
+    "import/imports-first": 0,
+    "import/no-named-as-default": 0,
+    "no-duplicate-imports": 0,
+    "consistent-return": 0
+  }
 }
