@@ -13,7 +13,7 @@ chai.use(chaiEnzyme());
 
 describe('Appコンポーネントのテスト', () => {
 
-  it('<Editor />と<Preview />がレンダリングされていること', () => {
+  it.skip('<Editor />と<Preview />がレンダリングされていること', () => {
     const wrapper = shallow(<App />);
     expect(wrapper.find(Editor)).to.have.length(1);
     expect(wrapper.find(Preview)).to.have.length(1);
