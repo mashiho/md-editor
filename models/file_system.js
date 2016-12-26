@@ -9,34 +9,26 @@ const {
 class FileSystem {
 
   static readFile(path) {
-    const currentPath = path;
+    const text = fs.readFileSync(path);
 
-    fs.readFile(path, (error, text) => {
-      if (error) {
-        console.log(error);
-        return;
-      }
-      // ビュー側にファイルから読み込んだテキストを送信
-      const data = {
-        text: text.toString(),
-        path: currentPath,
-      };
-      BrowserWindow.getFocusedWindow().webContents.send('setData', data);
-    });
+    // ビュー側にファイルから読み込んだテキストを送信
+    const data = {
+      text: text.toString(),
+      path: path,
+    };
+    BrowserWindow.getFocusedWindow().webContents.send('readFile', data);
   }
 
-  static writeFile(path, data) {
-    fs.writeFile(path, data, (error) => {
-      if (error) {
-        console.log(error);
-      }
-      const completeData = {
-        text: data,
-        markdown: data,
-        path,
-      };
-      BrowserWindow.getFocusedWindow().webContents.send('setData', completeData);
-    });
+  static writeFile(path, text) {
+    // TODO: ファイル書き込みが失敗したときのエラーハンドリング追加
+    fs.writeFileSync(path, text);
+
+    const data = {
+      text,
+      path,
+    };
+
+    BrowserWindow.getFocusedWindow().webContents.send('saveFile', data);
   }
 
   static newFile() {
@@ -53,7 +45,7 @@ class FileSystem {
         text: '',
         path: 'Undefined.md',
       };
-      BrowserWindow.getFocusedWindow().webContents.send('setData', data);
+      BrowserWindow.getFocusedWindow().webContents.send('clearText', data);
     }
   }
 
@@ -66,15 +58,14 @@ class FileSystem {
       properties: ['openFile'],
     };
 
-    dialog.showOpenDialog(
+    const fileNames = dialog.showOpenDialog(
       BrowserWindow.getFocusedWindow(),
-      options,
-      (fileNames) => {
-        if (fileNames) {
-          this.readFile(fileNames[0]);
-        }
-      }
+      options
     );
+
+    if (fileNames) {
+      this.readFile(fileNames[0]);
+    }
   }
 
   static saveFile(data, path = null) {
@@ -89,15 +80,14 @@ class FileSystem {
         properties: ['openFile'],
       };
 
-      dialog.showSaveDialog(
+      const fileName = dialog.showSaveDialog(
         BrowserWindow.getFocusedWindow(),
-        options,
-        (fileName) => {
-          if (fileName) {
-            this.writeFile(fileName, data);
-          }
-        }
+        options
       );
+
+      if (fileName) {
+        this.writeFile(fileName, data);
+      }
     }
   }
 
@@ -110,15 +100,15 @@ class FileSystem {
       properties: ['openFile'],
     };
 
-    dialog.showSaveDialog(
+    const fileName = dialog.showSaveDialog(
       BrowserWindow.getFocusedWindow(),
-      options,
-      (fileName) => {
-        if (fileName) {
-          this.writeFile(fileName, data);
-        }
-      }
+      options
     );
+    
+    // ファイルパスが取得できなかったときのエラーハンドリング追加
+    if (fileName) {
+      this.writeFile(fileName, data);
+    }
   }
 }
 

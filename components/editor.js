@@ -1,17 +1,14 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import Codemirror from 'react-codemirror';
 
-class Editor extends React.Component {
+class Editor extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: '',
-    };
+  static propTypes = {
+    text: PropTypes.string.isRequired,
   }
 
-  updateText = (newText) => {
-    this.props.onChange(newText);
+  onChange = (text) => {
+    this.props.onChange(text);
   }
 
   render() {
@@ -27,8 +24,9 @@ class Editor extends React.Component {
       <Codemirror
         id="editor"
         value={this.props.text}
-        onChange={this.updateText}
+        onChange={this.onChange}
         options={options}
+        defaultValue={this.props.defaultValue}
       />
     );
   }

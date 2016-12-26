@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "gulp build",
+    "build": "webpack",
     "test": "istanbul cover _mocha -- --require test/setup.js --compilers js:babel-register --recursive $(find test -name '*.spec.js')",
     "spectron": "mocha test/main_spec.js",
     "gulp": "gulp",
@@ -37,7 +37,9 @@
     "react": "^15.3.2",
     "react-codemirror": "^0.2.6",
     "react-dom": "^15.3.2",
-    "react-split-pane": "^0.1.57"
+    "react-redux": "^5.0.1",
+    "react-split-pane": "^0.1.57",
+    "redux": "^3.6.0"
   },
   "devDependencies": {
     "babel-core": "^6.18.2",
@@ -46,6 +48,7 @@
     "chai": "^3.5.0",
     "chai-enzyme": "^0.6.1",
     "devtron": "^1.4.0",
+    "electron-load-devtool": "^0.4.0",
     "electron-packager": "^8.3.0",
     "enzyme": "^2.6.0",
     "eslint": "^3.7.1",
