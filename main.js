@@ -1,5 +1,6 @@
 const electron = require('electron');
 const FileSystem = require('./models/file_system');
+const loadDevtool = require('electron-load-devtool');
 
 const {
   app,
@@ -40,15 +41,15 @@ const menu = Menu.buildFromTemplate([
         label: 'Save',
         accelerator: 'CmdOrCtrl+S',
         click() {
-          mainWindow.webContents.send('getData', '');
+          mainWindow.webContents.send('getSaveData', '');
           /**
            * NOTE: レンダラプロセスで読み込んだファイルのテキストとパスを受信
            */
-          ipcMain.on('setData', (event, data) => {
+          ipcMain.on('setSaveData', (event, data) => {
             if (data.path === 'Undefined.md') {
-              FileSystem.saveFile(data.markdown);
+              FileSystem.saveAsFile(data.text);
             } else {
-              FileSystem.saveFile(data.markdown, data.path);
+              FileSystem.saveFile(data.text, data.path);
             }
           });
         },
@@ -56,12 +57,12 @@ const menu = Menu.buildFromTemplate([
       {
         label: 'Save As...',
         click() {
-          mainWindow.webContents.send('getData', '');
+          mainWindow.webContents.send('getSaveAsData', '');
           /**
            * NOTE: レンダラプロセスで読み込んだファイルのテキストとパスを受信
            */
-          ipcMain.on('setData', (event, data) => {
-            FileSystem.saveFile(data.markdown);
+          ipcMain.on('setSaveAsData', (event, data) => {
+            FileSystem.saveAsFile(data.text);
           });
         },
       },
@@ -85,7 +86,7 @@ const menu = Menu.buildFromTemplate([
   //     {
   //       label: 'Toggle Developer Tools',
   //       accelerator: 'Alt+Command+I',
-  //       click: function () {
+  //       click() {
   //         mainWindow.toggleDevTools();
   //       },
   //     },
@@ -101,6 +102,8 @@ function createWindow() {
   // Menu.setApplicationMenu(menu);
 
   // NOTE: デバッグ用
+  // loadDevtool(loadDevtool.REACT_DEVELOPER_TOOLS, true);
+  // loadDevtool(loadDevtool.REDUX_DEVTOOLS);
   // mainWindow.webContents.openDevTools();
 
   mainWindow.on('closed', () => {

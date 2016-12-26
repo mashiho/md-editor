@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import marked from 'marked';
 import hljs from 'highlight.js';
 
-class Preview extends React.Component {
+class Preview extends Component {
 
   static propTypes = {
-    markdown: React.PropTypes.string.isRequired,
+    markdown: PropTypes.string.isRequired,
   }
 
   render() {

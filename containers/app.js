@@ -2,30 +2,51 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from '../components/app';
 import { ipcRenderer } from 'electron';
+import { Provider } from 'react-redux';
+import configureStore from '../store/configure_store';
+
+const store = configureStore();
 
 const app = ReactDOM.render(
-  <App />, document.getElementById('md-editor')
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('md-editor')
 );
 
 /**
- * NOTE: メインプロセスで読み込んだファイルのテキストを受信
- * TODO: send-pathと処理を統一する
+ * NOTE: ファイル読み込み
  */
-ipcRenderer.on('setData', (event, data) => {
-  app.setState({
-    text: data.text,
-    markdown: data.text,
-    path: data.path,
-  });
+ipcRenderer.on('readFile', (event, data) => {
+  store.dispatch({ type: 'READ_FILE', data });
+});
+
+/**
+ * NOTE: ファイル保存
+ */
+ipcRenderer.on('saveFile', (event, data) => {
+  store.dispatch({ type: 'SAVE_FILE', data });
+});
+
+/**
+ * NOTE: 新規作成
+ */
+ipcRenderer.on('clearText', (event, data) => {
+  store.dispatch({ type: 'CLEAR_TEXT', data });
 });
 
 /**
  * NOTE: メインプロセスでのファイル保存処理用にテキストとファイルパスを送信
  */
-ipcRenderer.on('getData', () => {
-  const data = {
-    markdown: app.state.markdown,
-    path: app.state.path,
-  };
-  ipcRenderer.send('setData', data);
+ipcRenderer.on('getSaveData', (event, arg) => {
+  const data = store.getState();
+  event.sender.send('setSaveData', data);
+});
+
+/**
+ * NOTE: メインプロセスでのファイル保存処理用にテキストとファイルパスを送信
+ */
+ipcRenderer.on('getSaveAsData', (event, arg) => {
+  const data = store.getState();
+  event.sender.send('setSaveAsData', data);
 });

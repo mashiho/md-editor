@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Layer } from 'office-ui-fabric-react/lib';
 
-class Footer extends React.Component {
+class Footer extends Component {
 
   static propTypes = {
-    path: React.PropTypes.string.isRequired,
+    path: PropTypes.string.isRequired,
   }
 
   render() {
