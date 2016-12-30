@@ -4,10 +4,12 @@ import App from '../components/app';
 import { ipcRenderer } from 'electron';
 import { Provider } from 'react-redux';
 import configureStore from '../store/configure_store';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
+injectTapEventPlugin();
 const store = configureStore();
 
-const app = ReactDOM.render(
+ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,

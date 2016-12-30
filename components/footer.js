@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Layer } from 'office-ui-fabric-react/lib';
+import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 
 class Footer extends Component {
 
@@ -9,11 +9,11 @@ class Footer extends Component {
 
   render() {
     return (
-      <Layer>
-        <div id="footer" className="ms-bgColor-themeDarkAlt ms-fontColor-white">
-          {this.props.path}
-        </div>
-      </Layer>
+      <Toolbar id='footer'>
+        <ToolbarGroup firstChild={true}>
+          <ToolbarTitle style={{color: '#fff'}} text={this.props.path} />
+        </ToolbarGroup>
+      </Toolbar>
     );
   }
 }
