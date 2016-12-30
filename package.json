@@ -33,12 +33,13 @@
     "github-markdown-css": "^2.4.1",
     "highlight.js": "^9.8.0",
     "marked": "^0.3.6",
-    "office-ui-fabric-react": "^0.58.0",
+    "material-ui": "^0.16.6",
     "react": "^15.3.2",
     "react-codemirror": "^0.2.6",
     "react-dom": "^15.3.2",
     "react-redux": "^5.0.1",
     "react-split-pane": "^0.1.57",
+    "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0"
   },
   "devDependencies": {

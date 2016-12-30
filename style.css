@@ -1,8 +1,8 @@
 #main {
     width: 100%;
     position: absolute;
-    top: 48px;
-    bottom: 29px;
+    top: 64px;
+    bottom: 40px;
 }
 
 body {
@@ -10,20 +10,11 @@ body {
     font-family: Hiragino Sans, "ヒラギノ角ゴシック", Hiragino Kaku Gothic ProN, "ヒラギノ角ゴ ProN W3";
 }
 
-/* ヘッダー・フッター共通 */
-.ms-Layer {
-    height: 48px;
-    display: block;
-}
-
 /* ヘッダー */
-#header, .ms-CommandBar {
+#header {
     position: fixed !important;
     width: 100%;
     z-index: 1;
-}
-
-#header {
     font-size: 20px;
     padding: 10px 30px;
 }
@@ -33,7 +24,12 @@ body {
     position: fixed;
     bottom: 0;
     width: 100%;
-    padding: 5px 20px;
+    height: 40px !important;
+}
+
+#footer span {
+    font-size: 16px !important;
+    padding-left: 20px;
 }
 
 /**

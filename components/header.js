@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { Layer } from 'office-ui-fabric-react/lib';
+import AppBar from 'material-ui/AppBar';
 
 class Header extends Component {
   render() {
     return (
-      <Layer>
-        <div id="header" className="ms-bgColor-black ms-fontColor-white">Markdown editor</div>
-      </Layer>
+      <AppBar
+        title="Markdown Editor"
+        showMenuIconButton={false}
+        zDepth={0}
+      />
     );
   }
 }
