@@ -1,6 +1,6 @@
 const electron = require('electron');
 const FileSystem = require('./models/file_system');
-const loadDevtool = require('electron-load-devtool');
+// const loadDevtool = require('electron-load-devtool');
 
 const {
   app,
